@@ -131,7 +131,7 @@ These are also found in other YouTube clients, and all are opt-in here:
 | `android-x86_64` APK | Android emulators and x86 Chromebooks |
 
 File names follow `Lumtub_<version>_<platform>`, for example `Lumtub_0.2.29-abc1234_windows-x64-v3-setup.exe`.<br>
-**Windows:** use the installer, or unzip the portable version and run `lumtub.exe`. No administrator rights needed.<br>
+**Windows:** use the installer, or unzip the portable version and run `lumtub.exe`. No administrator rights needed. Lumtub is not code-signed yet, so SmartScreen may warn: click **More info**, then **Run anyway**.<br>
 **Linux:** make the AppImage executable (`chmod +x Lumtub_*.AppImage`) and run it. It updates itself in place. If it says FUSE is missing, install your distribution's `fuse3` package, or start it with `--appimage-extract-and-run`.<br>
 The first start downloads yt-dlp and Deno from GitHub; after that Lumtub keeps itself up to date.<br>
 **Android (preview):** open the APK and allow installing from your browser or file manager when asked. New versions install from inside Lumtub; Android asks you to confirm. Live streams and downloads work too, through the yt-dlp built into the app; members-only videos don't play on Android yet.
@@ -205,7 +205,7 @@ Can't give money? ⭐ Star the repository, tell a friend, [report a bug or sugge
 
 ### Building
 
-Every push and pull request to `main` builds on GitHub Actions (`.github/workflows/build.yml`): a verified libmpv per CPU, the Rust core in `native/lumtub_core` (fat LTO), `flutter analyze`, the unit tests, a portable ZIP and an Inno Setup installer for x64, x64-v3 and arm64. Releases are made by the Create release workflow and carry signed packages.
+Every push and pull request to `main` builds on GitHub Actions (`.github/workflows/build.yml`): a verified libmpv per CPU, the Rust core in `native/lumtub_core` (fat LTO), `flutter analyze`, the unit tests, a portable ZIP and an Inno Setup installer for x64, x64-v3 and arm64. Releases are made by the Create release workflow. Each installer, ZIP, AppImage and DMG ships with a `.sig` file (Ed25519 + ML-DSA-65) that Lumtub checks before updating. Windows builds are not code-signed yet.
 
 Locally you need Flutter 3.47, Visual Studio with the C++ desktop workload, and Rust:
 
